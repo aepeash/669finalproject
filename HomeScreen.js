@@ -4,34 +4,50 @@ import { TextInput, Text, View, Image,
   from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-import { chatStyles, colors } from './Styles';
+import { postFeedStyles } from './Styles';
 import { getDataModel } from './DataModel';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export class HomeScreen extends React.Component {
     constructor(props) {
         super(props);
 
-        console.log('I was triggered by the constructor');
-
         this.dataModel = getDataModel();
         this.self = this.props.route.params.currentUser;
 
         this.state = {
-
+            posts: []
         };
     }
 
+    componentDidMount = () => {
+      // Executed the first time the component is mounted
+      this.subscribeToPosts();
+    }
+
+    componentWillUnmount = () => {
+      // Executed before the component is unmounted
+      // Unsubscribes me from post updates
+      this.dataModel.unsubscribeFromPosts(this.posts);
+    }
+
+    subscribeToPosts = async() => {
+      // Calls the dataModel.subscribeToPosts method and creates a listener for new posts, post updates
+      this.dataModel.subscribeToPosts(this.onPostUpdate);
+    }
+
+    onPostUpdate = (posts) => {
+      posts = posts.reverse();
+      this.setState({posts: posts}); // On each update, use setState to update the state
+    }
+
     render() {
-        console.log('I was triggered during render on HomeScreen');
-        console.log(this.state);
-        console.log('----------------');
         return (
-        <KeyboardAvoidingView 
-        style={chatStyles.container}
+        <KeyboardAvoidingView style={{flex: 1, alignItems: 'center', alignContent: 'flex-start', width: '100%'}}
         behavior={"height"}
         keyboardVerticalOffset={100}>
-        <View>
-          <FlatList
+        <View style={postFeedStyles.postListContainer}>
+          <FlatList 
             data={this.state.posts}
             ref={(ref) => {this.flatListRef = ref}}
             onContentSizeChange={() => {
@@ -41,12 +57,13 @@ export class HomeScreen extends React.Component {
             }}
             renderItem={({item})=>{
               return (
-                <View style={item.author === this.self ? 
-                  chatStyles.chatTextSelfContainer :
-                  chatStyles.chatTextOtherContainer
-                }>
-                    <Text>{item.description}</Text>
+                <TouchableOpacity onPress={()=>this.props.navigation.navigate('PostDetail', {'postKey': item.key})}>
+                <View style={{flex: 1, alignItems: 'center', width: '100%', padding: '5%'}}>
+                    <Image style={{width:225, height:300}} source={{uri: item.imageURL}}/>
+                    <Text style={{ fontSize: 18, fontWeight: '600' }}>{item.title}</Text>
+                    <Text style={{ fontSize: 14, color: 'gray' }}>{item.description}</Text>
                 </View>
+                </TouchableOpacity>
               );
             }}
           />

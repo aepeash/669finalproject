@@ -7,6 +7,24 @@ export const colors = {
   outline: '#BDBDBD' // MD Gray 400
 }
 
+export const postFeedStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+    //paddingTop: 20
+  },
+  postListContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    //backgroundColor: 'cyan',
+    justifyContent: 'center',
+    alignItems: 'center',
+    //width: '100%',
+  }
+})
+
 
 export const loginStyles = StyleSheet.create({
   container: {
