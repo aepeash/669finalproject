@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { color } from 'react-native-reanimated';
 
 export const colors = {
   primary: '#F68444', // orange
@@ -39,7 +40,7 @@ export const loginStyles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'flex-end',
       width: '100%',
-      // backgroundColor: 'lime'
+      
     },
       logoImage: {
         alignItems: 'center',
@@ -53,15 +54,16 @@ export const loginStyles = StyleSheet.create({
       justifyContent: 'center',
       alignItems: 'center',
       width: '100%',
-      // backgroundColor: 'lightblue'
+      
     },
       inputRow: {
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'center',
         paddingVertical: 15,
-        // backgroundColor: 'pink'
+        
       },
+     
         inputLabel: {
           flex: 0.3,
           justifyContent: 'flex-end',
@@ -86,22 +88,23 @@ export const loginStyles = StyleSheet.create({
         width: '100%',
         justifyContent: 'center',
         alignItems: 'flex-start',
-        // backgroundColor: 'pink'
+        
       },
         buttonContainer: {
           justifyContent: 'center',
-          alignItems: 'center',
+          marginLeft: 8,
           borderWidth: 1,
           borderColor: colors.outline,
           borderRadius: 6,
           backgroundColor: colors.primary,
           width: 148,
           height: 50,
-          top: 15
+          top: 15,
+        
         },
         buttonContainer2: {
           justifyContent: 'space-around',
-          alignItems: 'center',
+          marginRight: 8,
           borderWidth: 1,
           borderColor: colors.primary,
           borderRadius: 6,
@@ -110,15 +113,64 @@ export const loginStyles = StyleSheet.create({
           height: 50,
           top: 15
         },
+     
           buttonText: {
             textAlign: 'center',
-            color: 'white'
+            color: 'white',
           },
           buttonText2: {
+
             textAlign: 'center',
             color: colors.primary
           }
 });
+
+export const homeStyles = StyleSheet.create({
+  container: {
+    flex: 1, 
+    alignItems: 'center', 
+    width: '100%', 
+    padding: '5%'
+  },
+  image: {
+    width:320, 
+    height:300,
+  },
+  title: {
+    paddingTop:15,
+    fontSize: 18, 
+    fontWeight: '600',
+    color: colors.primary
+  },
+
+  descriptions: {
+    paddingTop:5,
+    fontSize: 14, 
+    color: 'gray'
+  },
+
+  header: {
+    marginTop: 20,
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: colors.primary
+
+  },
+
+  search: {
+      marginTop:20,
+      backgroundColor: '#fff',
+      alignItems: 'center',
+      justifyContent: 'center',
+      height: 40,
+      borderRadius: 25,
+      borderColor: colors.primary,
+      borderWidth: 1,
+      marginLeft:20,
+      marginRight: 20,
+  }
+
+  });
 
 export const peopleStyles = StyleSheet.create({
   container: {

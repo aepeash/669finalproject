@@ -164,14 +164,7 @@ export class LoginScreen extends React.Component {
         ):(
 
           <View style={loginStyles.bottomView}>
-            <TouchableOpacity 
-              style={loginStyles.buttonContainer}
-              onPress={()=>{
-                this.setState({mode: 'login'})
-              }}
-              >
-              <Text style={loginStyles.buttonText}>Login</Text>
-            </TouchableOpacity>
+           
             <TouchableOpacity 
               style={loginStyles.buttonContainer}
               onPress={this.onCreateAccount}
