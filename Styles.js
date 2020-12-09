@@ -149,6 +149,11 @@ export const homeStyles = StyleSheet.create({
     color: 'gray'
   },
 
+  headerContainer: {
+    flexDirection: 'row',
+    backgroundColor: 'pink'
+  },
+
   header: {
     marginTop: 20,
     fontSize: 20,
@@ -268,4 +273,26 @@ export const chatStyles = StyleSheet.create({
         padding: 5,
         margin: 5
       }
+});
+
+export const profileStyles = StyleSheet.create({
+  topView: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    paddingTop: 50
+  },
+  displayName: {
+    fontSize: 30,
+    paddingTop: 20,
+    paddingBottom: 20
+  },
+  myChatsButton: {
+    borderWidth: 1,
+    borderColor: '#F68444',
+    borderRadius: 5,
+    padding: 10,
+  }
+
 });

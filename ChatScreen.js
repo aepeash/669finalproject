@@ -35,6 +35,7 @@ export class ChatScreen extends React.Component {
   subscribeToChat = async() => {
     this.chat = await this.dataModel
       .getOrCreateChat(this.self, this.other);
+    console.log(this.chat);
     this.dataModel.subscribeToChat(this.chat, this.onChatUpdate);
   }
 

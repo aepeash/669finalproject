@@ -14,7 +14,10 @@ export class PostDetailScreen extends React.Component {
         this.dataModel = getDataModel();
         this.postKey = this.props.route.params.postKey;
         let post = this.dataModel.getPostForID(this.postKey);
+        console.log("this.postKey:", this.postKey);
         this.state = {post: post};
+        console.log("this.state.post:");
+        console.log(this.state.post);
         
     }
     render() {

@@ -21,14 +21,14 @@ class DataModel {
   }
 
   asyncInit = async () => {
-    this.loadUsers();
-    this.loadChats();
-    this.loadPosts();
+    await this.loadUsers();
+    await this.loadChats();
+    await this.loadPosts();
     //this.subscribeToChats();
   }
 
   loadPosts = async () => {
-    let querySnap = await this.postRef.get();
+    let querySnap = await this.postsRef.get();
     querySnap.forEach(qDocSnap => {
       let key = qDocSnap.id;
       let data = qDocSnap.data;
@@ -224,6 +224,7 @@ class DataModel {
       timestamp: message.timestamp,
       author: message.author.key,
     }
+    console.log("fbMessageObject: ", fbMessageObject);
 
     messagesRef.add(fbMessageObject); // onSnapshot will update local model
   }

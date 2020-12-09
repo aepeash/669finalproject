@@ -8,6 +8,7 @@ import { postFeedStyles } from './Styles';
 import { getDataModel } from './DataModel';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { homeStyles } from './Styles';
+import { FontAwesome } from '@expo/vector-icons'; 
 
 const thePosts = [
   {
@@ -86,6 +87,7 @@ export class HomeScreen extends React.Component {
 
         this.dataModel = getDataModel();
         this.self = this.props.route.params.currentUser;
+        console.log("this.self on HomeScreen: ", this.self);
 
         this.state = {
           query: '',
@@ -161,7 +163,13 @@ export class HomeScreen extends React.Component {
         <KeyboardAvoidingView style={{flex: 1, alignItems: 'center', alignContent: 'flex-start', width: '100%'}}
         behavior={"height"}
         keyboardVerticalOffset={100}>
-          <Text style={homeStyles.header}>All posts</Text>
+          <View style={homeStyles.headerContainer}>
+            <Text style={homeStyles.header}>All posts</Text>
+            <FontAwesome name="user-circle-o" 
+                          size={24} 
+                          color={'#F68444'}
+                          onPress={()=>this.props.navigation.navigate('Profile', {currentUser: this.self})} />
+          </View>
         <View style={postFeedStyles.postListContainer}>
           <FlatList 
             ListHeaderComponent={this.renderHeader}

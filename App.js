@@ -8,6 +8,7 @@ import { ChatScreen } from './ChatScreen';
 import { CameraScreen } from './CameraScreen';
 import { HomeScreen } from './HomeScreen';
 import { PostDetailScreen } from './PostDetailScreen';
+import { ProfileScreen } from './ProfileScreen';
 
 const Stack = createStackNavigator();
 
@@ -22,6 +23,7 @@ function App() {
       >
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Profile" component={ProfileScreen} />
         <Stack.Screen name="PostDetail" component={PostDetailScreen} />
         <Stack.Screen name="People" component={PeopleScreen} />
         <Stack.Screen name="Chat" component={ChatScreen} />
