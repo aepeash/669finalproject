@@ -284,6 +284,65 @@ class DataModel {
 
   }
 
+  addPost = async (title, description, imageUri, self) => {
+    console.log('... and here we would add the image ...');
+    console.log(imageUri);
+  
+    // handleTakePicture():
+    // let picData = await this.camera.takePictureAsync();
+    // this.dataModel.addChatImage(this.chat, this.currentUser, picData);
+  
+  
+    // Set up storage refs and download URL
+    let fileName = '' + Date.now();
+    let imageRef = this.storageRef.child(fileName);
+    // console.log("imageRef: ", imageRef);
+  
+    // fetch the image object from the local filesystem
+    console.log("fetching from system");
+    let response = await fetch(imageUri);
+    let imageBlob = await response.blob();
+  
+  
+    // then upload it to Firebase Storage
+    console.log("uploding to firebase");
+    await imageRef.put(imageBlob);
+  
+    // ... and update the current image Document in Firestore
+    console.log("waiting for image url");
+    let downloadImagePostURL = await imageRef.getDownloadURL();
+    let author = self;
+    delete author.password;
+  
+  
+    let post = {
+     // height: imageObject.height,
+     // width: imageObject.width,
+      author: author,
+      title: title,
+      description: description,
+      imageURL: downloadImagePostURL,
+      timestamp: Date.now()
+    }
+    //usually uri
+    console.log("fbImageObject: ", post);
+  
+  
+    // let imageDocSnap = await this.messagesRef.get();
+    // let finalImage = imageDocSnap.data();
+  
+  
+    this.postsRef.add(post);
+  
+  
+    // await messagesRef.set(fbImageObject);
+  
+    // this.addChatMessage(chat.key, fbImageObject);
+  
+  
+  }
+  
+
 }
 
 let theDataModel = undefined;

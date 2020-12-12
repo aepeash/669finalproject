@@ -9,6 +9,7 @@ import { CameraScreen } from './CameraScreen';
 import { HomeScreen } from './HomeScreen';
 import { PostDetailScreen } from './PostDetailScreen';
 import { ProfileScreen } from './ProfileScreen';
+import {UploadPostScreen} from './UploadPostScreen';
 
 const Stack = createStackNavigator();
 
@@ -28,6 +29,7 @@ function App() {
         <Stack.Screen name="People" component={PeopleScreen} />
         <Stack.Screen name="Chat" component={ChatScreen} />
         <Stack.Screen name="Camera" component={CameraScreen} />
+        <Stack.Screen name="Upload Post" component={UploadPostScreen} />
         
       </Stack.Navigator>
     </NavigationContainer>
