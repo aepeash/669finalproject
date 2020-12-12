@@ -28,14 +28,31 @@ class DataModel {
   }
 
   loadPosts = async () => {
+    console.log("Loading posts");
     let querySnap = await this.postsRef.get();
-    querySnap.forEach(qDocSnap => {
-      let key = qDocSnap.id;
-      let data = qDocSnap.data;
-      data.key = key;
-      this.posts.push(data);
-    })
+    querySnap.forEach(async qDocSnap => {
+      let data = qDocSnap.data();
+      let thisPost = {
+        key: qDocSnap.id,
+        title: data.title,
+        description: data.description,
+        author: data.author,
+        timestmap: data.timestamp,
+        comments: []
+      }
+
+      let commentsRef = qDocSnap.ref.collection("comments");
+      let commentsQSnap = await commentsRef.get();
+      commentsQSnap.forEach(qDocSnap => {
+        let commentData = qDocSnap.data();
+        commentData.key = qDocSnap.id;
+        thisPost.comments.push(commentData);
+        console.log(thisPost);
+      });
+      this.posts.push(thisPost);
+    });
   }
+
 
   loadUsers = async () => {
     let querySnap = await this.usersRef.get();
@@ -81,6 +98,7 @@ class DataModel {
   getPostForID = (id) => {
     for (let post of this.posts) {
       if (post.key === id) {
+        console.log(post);
         return post;
       }
     }
@@ -129,7 +147,7 @@ class DataModel {
   }
 
   subscribeToPosts = (notifyOnUpdate) => {
-    this.postSnapshotUnsub = this.postsRef
+    this.postsSnapshotUnsub = this.postsRef
         .orderBy('timestamp')
         .onSnapshot((querySnap) => {
           this.posts = [];
@@ -143,6 +161,24 @@ class DataModel {
         });
   }
 
+  subscribeToPost = (post, notifyOnUpdate) => {
+    console.log('Sub to post (data model)');
+    this.postSnapshotUnsub = this.postsRef.doc(post.key)
+        .collection('comments')
+        .orderBy('timestamp')
+        .onSnapshot((querySnap) => {
+          post.comments = [];
+          querySnap.forEach((qDocSnap) => {
+            console.log('loop');
+            let commentObj = qDocSnap.data();
+            commentObj.key = qDocSnap.id;
+            post.comments.push(commentObj);
+          });
+          console.log(post);
+          notifyOnUpdate(); // call back to the subscriber
+        });
+  }
+
   unsubscribeFromChat = (chat) => {
     // don't really need 'chat' but could need it in the future
     if (this.chatSnapshotUnsub) {
@@ -151,6 +187,12 @@ class DataModel {
   }
 
   unsubscribeFromPosts = () => {
+    if (this.postsSnapshotUnsub) {
+      this.postsSnapshotUnsub();
+    }
+  }
+
+  unsubscribeFromPost = () => {
     if (this.postSnapshotUnsub) {
       this.postSnapshotUnsub();
     }
@@ -212,6 +254,19 @@ class DataModel {
     // should throw an error prob'ly
     // return undefined
     // [[almost accidental haiku]]
+  }
+
+  addPostComment = async (postID, comment) => {
+    let commentsRef = this.postsRef.doc(postID).collection('comments');
+
+    let fbCommentObject = {
+      text: comment.text,
+      timestamp: comment.timestamp,
+      author: comment.author.key
+    }
+
+    commentsRef.add(fbCommentObject);
+
   }
 
   addChatMessage = async (chatID, message) => { // doesn't need to be async?

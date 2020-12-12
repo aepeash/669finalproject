@@ -296,3 +296,37 @@ export const profileStyles = StyleSheet.create({
   }
 
 });
+
+export const detailsStyle = StyleSheet.create({
+  image: {
+    width:320,
+    height:300,
+    },
+  detailsContainer: {
+  flex: 1,
+  alignItems: 'center',
+  width: '100%',
+  padding: '5%',
+    backgroundColor: 'pink'
+  },
+  title: {
+    paddingTop:15,
+    fontSize: 35,
+    fontWeight: '600',
+    color: colors.primary
+  },
+  descriptions: {
+    padding:5,
+    fontSize: 20,
+    color: 'gray'
+  },
+  container: {
+      flex: .9,
+      backgroundColor: '#A9A9A9',
+      width: '80%',
+      alignItems: 'flex-start',
+      justifyContent: 'center',
+      alignSelf: 'center',
+      paddingTop: '3%'
+    }
+});
