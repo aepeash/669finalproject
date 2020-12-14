@@ -64,6 +64,7 @@ class DataModel {
     });
   }
 
+
   getUsers = () => {
     return this.users;
   }
@@ -104,6 +105,17 @@ class DataModel {
     newSavedPostDocRef.add(postToSave);
     return postToSave;
   }
+
+  // loadSavedPosts = async (userKey) => {
+  //   // this.usersRef = firebase.firestore().collection('users');
+  //   let querySnap = await this.usersRef.doc(userKey).collection('savedPosts').get();
+  //   querySnap.forEach(qDocSnap => {
+  //     let key = qDocSnap.id;
+  //     let data = qDocSnap.data();
+  //     data.key = key;
+  //     this.users.push(data);
+  //   });
+  
 
   getUserForID = (id) => {
     for (let user of this.users) {

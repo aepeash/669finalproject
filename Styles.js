@@ -276,12 +276,27 @@ export const chatStyles = StyleSheet.create({
 });
 
 export const profileStyles = StyleSheet.create({
+  profileContainer: {
+    flex: 1,
+    alignItems: 'center',
+    width: '100%',
+    padding: '5%',
+    // backgroundColor: 'yellow'
+    },
   topView: {
     flex: 1,
-    backgroundColor: '#fff',
+    // backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    paddingTop: 50
+    paddingTop: 50,
+    // backgroundColor: 'green'
+  },
+  bottomView: {
+    flex: 1,
+    backgroundColor: 'pink'
+  },
+  savedPostList: {
+    backgroundColor: 'orange'
   },
   displayName: {
     fontSize: 30,
