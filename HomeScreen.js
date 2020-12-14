@@ -101,11 +101,11 @@ export class HomeScreen extends React.Component {
             <FontAwesome name="user-circle-o" 
                           size={24} 
                           color={'#F68444'}
-                          onPress={()=>this.props.navigation.navigate('Profile', {currentUser: this.self})} />
+                          onPress={()=>this.props.navigation.navigate('Profile', {'currentUser': this.self})} />
             <FontAwesome name="plus-circle"
                           size={40} 
                           color={'#F68444'}
-                          onPress={()=>this.props.navigation.navigate('Upload Post',{currentUser: this.self} )} /> 
+                          onPress={()=>this.props.navigation.navigate('Upload Post',{'currentUser': this.self} )} />
                        
           </View>
         <View style={postFeedStyles.postListContainer}>
@@ -120,7 +120,7 @@ export class HomeScreen extends React.Component {
             // }}
             renderItem={({item})=>{
               return (
-                <TouchableOpacity onPress={()=>this.props.navigation.navigate('PostDetail', {'postKey': item.key, currentUser: this.self})}>
+                <TouchableOpacity onPress={()=>this.props.navigation.navigate('PostDetail', {'postKey': item.key, 'currentUser': this.self})}>
                 <View style={homeStyles.container}>
                  
                     <Image style={homeStyles.image} source={{uri: item.imageURL}}/>

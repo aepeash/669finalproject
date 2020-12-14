@@ -415,6 +415,30 @@ class DataModel {
   
   
   }
+
+  parseUnixTimestamp = (unix_timestamp) => {
+    /* I took most of this thisfrom this
+    StackOverflow: https://stackoverflow.com/questions/23593052/format-javascript-date-as-yyyy-mm-dd?page=1&tab=votes#tab-top
+    */
+    let d = new Date(unix_timestamp);
+
+    let month = '' + (d.getMonth() + 1);
+    let day = '' + d.getDate();
+    let year = d.getFullYear();
+    let hour = d.getHours();
+    let minute = d.getMinutes();
+
+    if (month.length < 2)
+      month = '0' + month;
+    if (day.length < 2)
+      day = '0' + day;
+
+    let date = [year, month, day].join('-');
+    let time = hour + ':' + minute;
+    let datetime = date + ' ' + time;
+
+    return datetime
+  }
   
 
 }

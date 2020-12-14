@@ -306,8 +306,7 @@ export const detailsStyle = StyleSheet.create({
   flex: 1,
   alignItems: 'center',
   width: '100%',
-  padding: '5%',
-    backgroundColor: 'pink'
+  padding: '5%'
   },
   title: {
     paddingTop:15,
@@ -331,5 +330,39 @@ export const detailsStyle = StyleSheet.create({
     },
     heartContainer: {
       flexDirection: 'row',
-    }
+    },
+  root: {
+    //backgroundColor: "gray",
+    marginTop:10,
+    width: '100%',
+    height: '100%'
+  },
+  secondcontainer: {
+    paddingLeft: 19,
+    paddingRight: 16,
+    paddingVertical: 12,
+    flexDirection: 'row',
+    alignItems: 'flex-start'
+  },
+  content: {
+    marginLeft: 16,
+    flex: 1,
+  },
+  contentHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 6
+  },
+  separator: {
+    height: 1,
+    backgroundColor: "#CCCCCC"
+  },
+  time:{
+    fontSize:11,
+    color:"#808080",
+  },
+  name:{
+    fontSize:16,
+    fontWeight:"bold",
+  }
 });

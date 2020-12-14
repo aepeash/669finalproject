@@ -45,17 +45,17 @@ export class PostDetailScreen extends React.Component {
     }
 
     onCommentSend = async () => {
-      let commentData = {
-        text: this.state.inputText,
-        timestamp: Date.now(),
-        author: this.self,
-      }
-      await this.dataModel.addPostComment(this.postKey, commentData);
-      
-      this.setState({
-        comments: this.post.comments,
-        inputText: ''
-      });
+        let commentData = {
+            text: this.state.inputText,
+            timestamp: Date.now(),
+            author: this.self,
+        }
+        await this.dataModel.addPostComment(this.postKey, commentData);
+
+        this.setState({
+            comments: this.post.comments,
+            inputText: ''
+        });
     }
 
     render() {
@@ -72,8 +72,6 @@ export class PostDetailScreen extends React.Component {
             <Text> Add this to your list!</Text>
           </View>
           <View style={detailsStyle.detailsContainer}>
-            <Text style={detailsStyle.comment}>this is a comment </Text>
-
             <View style={chatStyles.inputContainer}>
             <View style={chatStyles.inputRow}>
               <TextInput 
@@ -94,16 +92,21 @@ export class PostDetailScreen extends React.Component {
             </View>
           </View>
 
-          <FlatList
-            data={this.post.comments}
-            ref={(ref) => {this.flatListRef = ref}}
-            renderItem={({item})=>{
-              return (
-                <View style={item.author === this.self ? 
-                  chatStyles.chatTextSelfContainer :
-                  chatStyles.chatTextOtherContainer }>
-                    <Text>{item.text}</Text>
-                </View>
+            <FlatList
+                style={detailsStyle.root}
+                data={this.post.comments}
+                ref={(ref) => {this.flatListRef = ref}}
+                renderItem={({item}) => {
+                    return (
+                        <View style={detailsStyle.secondcontainer}>
+                            <View style={detailsStyle.content}>
+                                <View style={detailsStyle.contentHeader}>
+                                    <Text  style={detailsStyle.name}>{item.author.displayName}</Text>
+                                    <Text style={detailsStyle.time}> {this.dataModel.parseUnixTimestamp(item.timestamp)}</Text>
+                                    <Text>{item.text}</Text>
+                                </View>
+                            </View>
+                        </View>
               );
             }}
           />
