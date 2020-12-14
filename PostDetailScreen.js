@@ -68,13 +68,12 @@ export class PostDetailScreen extends React.Component {
             <AntDesign name="hearto" 
                               size={24} 
                               color={'#F68444'}
-                              onPress={()=>this.dataModel.savePost(this.state.post, this.self.key)} />
+                              onPress={()=>this.dataModel.savePost(this.post, this.self.key)} />
             <Text> Add this to your list!</Text>
           </View>
           <View style={detailsStyle.detailsContainer}>
-<<<<<<< HEAD
             <Text style={detailsStyle.comment}>this is a comment </Text>
-=======
+
             <View style={chatStyles.inputContainer}>
             <View style={chatStyles.inputRow}>
               <TextInput 
@@ -93,7 +92,6 @@ export class PostDetailScreen extends React.Component {
               />
             </View>
             </View>
->>>>>>> 5a0aea7c39c0954d97b272db5cfb2e5bc65dd9e8
           </View>
 
           <FlatList

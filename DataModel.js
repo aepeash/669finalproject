@@ -93,14 +93,15 @@ class DataModel {
     }
     // this.usersRef = firebase.firestore().collection('users');
     // add the data to Firebase (user collection -> saved posts documents)
-    let newSavedPostDocRef = await this.usersRef.doc(userKey).add(postToSave);
+    // let newSavedPostDocRef = await this.usersRef.doc(userKey).add(postToSave);
+    let newSavedPostDocRef = await this.usersRef.doc(userKey).collection('savedPosts');
 
     // get the new Firebase ID and save it as the local "key"
     let key = newSavedPostDocRef.id;
     postToSave.key = key;
     console.log("~~~~~savePost~~~~~~");
     console.log("postToSave: ", postToSave);
-    // newSavedPostDocRef.add(postToSave);
+    newSavedPostDocRef.add(postToSave);
     return postToSave;
   }
 
