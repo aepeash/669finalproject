@@ -328,5 +328,8 @@ export const detailsStyle = StyleSheet.create({
       justifyContent: 'center',
       alignSelf: 'center',
       paddingTop: '3%'
+    },
+    heartContainer: {
+      flexDirection: 'row',
     }
 });

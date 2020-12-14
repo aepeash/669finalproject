@@ -120,7 +120,7 @@ export class HomeScreen extends React.Component {
             // }}
             renderItem={({item})=>{
               return (
-                <TouchableOpacity onPress={()=>this.props.navigation.navigate('PostDetail', {'postKey': item.key, 'currentUser': this.self})}>
+                <TouchableOpacity onPress={()=>this.props.navigation.navigate('PostDetail', {'postKey': item.key, currentUser: this.self})}>
                 <View style={homeStyles.container}>
                  
                     <Image style={homeStyles.image} source={{uri: item.imageURL}}/>

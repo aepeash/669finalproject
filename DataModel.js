@@ -86,6 +86,24 @@ class DataModel {
     return newUser;
   }
 
+  savePost = async (post, userKey) => {
+    // assemble the data structure
+    let postToSave = {
+      post: post,
+    }
+    // this.usersRef = firebase.firestore().collection('users');
+    // add the data to Firebase (user collection -> saved posts documents)
+    let newSavedPostDocRef = await this.usersRef.doc(userKey).add(postToSave);
+
+    // get the new Firebase ID and save it as the local "key"
+    let key = newSavedPostDocRef.id;
+    postToSave.key = key;
+    console.log("~~~~~savePost~~~~~~");
+    console.log("postToSave: ", postToSave);
+    // newSavedPostDocRef.add(postToSave);
+    return postToSave;
+  }
+
   getUserForID = (id) => {
     for (let user of this.users) {
       if (user.key === id) {
@@ -162,7 +180,7 @@ class DataModel {
   }
 
   subscribeToPost = (post, notifyOnUpdate) => {
-    console.log('Sub to post (data model)');
+    // console.log('Sub to post (data model)');
     this.postSnapshotUnsub = this.postsRef.doc(post.key)
         .collection('comments')
         .orderBy('timestamp')
@@ -174,7 +192,7 @@ class DataModel {
             commentObj.key = qDocSnap.id;
             post.comments.push(commentObj);
           });
-          console.log(post);
+          // console.log(post);
           notifyOnUpdate(); // call back to the subscriber
         });
   }
