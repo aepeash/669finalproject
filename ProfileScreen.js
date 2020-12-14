@@ -22,14 +22,16 @@ export class ProfileScreen extends React.Component {
         this.dataModel = getDataModel();
         this.usersRef = firebase.firestore().collection('users');
         this.self = this.props.route.params.currentUser;
+        console.log(" ");
         console.log("~~~~profile screen~~~~~");
         console.log("this.self on Profile Screen: ", this.self);
+        this.savedPosts2 = []
 
         this.state = {
           savedPosts: []
         };
         this.asyncInit();
-        console.log("this.state.savedPosts: ", this.state.savedPosts);
+        console.log("this.state.savedPosts in constructor: ", this.state.savedPosts);
         
     }
     asyncInit = async () => {
@@ -47,8 +49,11 @@ export class ProfileScreen extends React.Component {
         console.log("--------- data end------------");
         data.key = key;
         this.state.savedPosts.push(data);
+        this.savedPosts2.push(data);
       });
+      this.setState({savedPosts: this.state.savedPosts})
       console.log("this.state.savedPosts in loadSavedPosts: ", this.state.savedPosts);
+      console.log("this.savedPosts2 in loadSavedPosts: ", this.savedPosts2);
     }
 
 
@@ -71,6 +76,7 @@ export class ProfileScreen extends React.Component {
                 data={this.state.savedPosts}
                 ref={(ref) => {this.flatListRef = ref}}
                 renderItem={({item}) => {
+                    console.log("?????????is this working??")
                     return (
                       // <View>
                       //     <Image style={homeStyles.image}source={{uri: item.imageURL}}/>
@@ -78,7 +84,7 @@ export class ProfileScreen extends React.Component {
                       //     <Text> {item.post.author.displayName}</Text>
                       //     <Text>{item.text}</Text>
                       // </View>
-                      <View style={homeStyles.container}>
+                      <View>
                  
                         <Image style={homeStyles.image} source={{uri: item.post.imageURL}}/>
                         <Text style={homeStyles.title}>{item.post.title}</Text>
