@@ -40,6 +40,7 @@ export class PostDetailScreen extends React.Component {
     }
 
     onPostUpdate = () => {
+      this.post.comments = this.post.comments.reverse();
       this.setState({comments: this.post.comments});
     }
 
@@ -71,9 +72,45 @@ export class PostDetailScreen extends React.Component {
             <Text> Add this to your list!</Text>
           </View>
           <View style={detailsStyle.detailsContainer}>
+<<<<<<< HEAD
             <Text style={detailsStyle.comment}>this is a comment </Text>
+=======
+            <View style={chatStyles.inputContainer}>
+            <View style={chatStyles.inputRow}>
+              <TextInput 
+                style={chatStyles.inputBox}
+                value={this.state.inputText}
+                returnKeyType={'send'}
+                onChangeText={(text) => {
+                  this.setState({inputText: text})
+                }}
+                onSubmitEditing={this.onCommentSend}/>
+              <Ionicons 
+                name='md-send' 
+                size={36}
+                color={colors.primary}
+                onPress={this.onCommentSend}
+              />
+            </View>
+            </View>
+>>>>>>> 5a0aea7c39c0954d97b272db5cfb2e5bc65dd9e8
           </View>
+
+          <FlatList
+            data={this.post.comments}
+            ref={(ref) => {this.flatListRef = ref}}
+            renderItem={({item})=>{
+              return (
+                <View style={item.author === this.self ? 
+                  chatStyles.chatTextSelfContainer :
+                  chatStyles.chatTextOtherContainer }>
+                    <Text>{item.text}</Text>
+                </View>
+              );
+            }}
+          />
         </View>
+
       )
   }
 
