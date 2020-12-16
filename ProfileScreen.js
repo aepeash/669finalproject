@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextInput, Text, View, Image,
+import { TextInput, Text, View, Image, ScrollView,
   FlatList, KeyboardAvoidingView } 
   from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
@@ -59,6 +59,7 @@ export class ProfileScreen extends React.Component {
 
     render() {
       return ( 
+        <ScrollView >
          <View style={profileStyles.profileContainer}>
           <View style={profileStyles.topView}>
               <FontAwesome name="user-circle-o" 
@@ -85,17 +86,25 @@ export class ProfileScreen extends React.Component {
                       //     <Text>{item.text}</Text>
                       // </View>
                       <View>
+
+                        <View style={profileStyles.titleandIcon}>
+                        <FontAwesome name="heart" 
+                                  size={20} 
+                                  color={'#F68444'} />
+                          <Text style={profileStyles.titleFavorites}> My favorites: </Text>
+                        </View>
                  
                         <Image style={homeStyles.image} source={{uri: item.post.imageURL}}/>
-                        <Text style={homeStyles.title}>{item.post.title}</Text>
-                        <Text style={homeStyles.descriptions}>{item.post.description}</Text>
-                        <Text> hello?</Text>
+                        <Text style={profileStyles.title}>{item.post.title}</Text>
+                        <Text style={profileStyles.descriptions}>{item.post.description}</Text>
+                        
                       
                       </View>
               );
             }}/>
           </View>
         </View>
+        </ScrollView>
       )
     }
   

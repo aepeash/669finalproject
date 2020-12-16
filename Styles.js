@@ -136,34 +136,73 @@ export const homeStyles = StyleSheet.create({
     width:320, 
     height:300,
   },
-  title: {
+
+  titleandlike: {
+    width:'100%',
     paddingTop:15,
-    fontSize: 18, 
+    paddingLeft: 10,
+    paddingRight:10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between'
+  },
+
+  title: { 
+    fontSize: 22, 
     fontWeight: '600',
     color: colors.primary
   },
 
+
   descriptions: {
     paddingTop:5,
+    paddingLeft: 10,
+    paddingRight:10,
     fontSize: 14, 
-    color: 'gray'
+    color: 'gray',
+    width: '100%',
+
   },
 
   headerContainer: {
     flexDirection: 'row',
-    backgroundColor: 'pink'
+    justifyContent: 'flex-end',
+    width: '100%',
+    alignItems: 'center',
+  },
+
+  headerParent: {
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexDirection: 'row',
+    paddingLeft: 50,
+    paddingRight: 50,
+    marginTop:20,
+    marginBottom: 17
+  },
+
+  appName: {
+    flexDirection: 'row',
+    alignItems: 'center',
+
+  },
+
+  header1: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#7C7C7C',
+    
   },
 
   header: {
-    marginTop: 20,
-    fontSize: 20,
+    fontSize: 24,
     fontWeight: 'bold',
-    color: colors.primary
-
+    color: colors.primary,
+    marginTop: 15,
+    marginBottom: 10
   },
 
   search: {
-      marginTop:20,
       backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'center',
@@ -173,7 +212,8 @@ export const homeStyles = StyleSheet.create({
       borderWidth: 1,
       marginLeft:20,
       marginRight: 20,
-  }
+      marginBottom: 20
+  },
 
   });
 
@@ -293,11 +333,39 @@ export const profileStyles = StyleSheet.create({
   },
   bottomView: {
     flex: 1,
-    backgroundColor: 'pink'
+    
   },
   savedPostList: {
-    backgroundColor: 'orange'
+    marginTop:25
   },
+
+  title: { 
+    marginTop:10,
+    fontSize: 22, 
+    fontWeight: '600',
+    color: colors.primary
+  },
+
+  descriptions: {
+    fontSize: 14, 
+    color: 'gray',
+    marginTop: 8
+  },
+
+  titleandIcon: {
+    flexDirection: "row",
+    alignItems: 'center'
+
+  },
+
+  titleFavorites: {
+    fontSize: 20,
+    color: colors.primary,
+    fontWeight: '600',
+    marginBottom: 15,
+    marginTop: 15
+  },
+
   displayName: {
     fontSize: 30,
     paddingTop: 20,
@@ -317,35 +385,60 @@ export const detailsStyle = StyleSheet.create({
     width:320,
     height:300,
     },
+
   detailsContainer: {
-  flex: 1,
-  alignItems: 'center',
-  width: '100%',
-  padding: '5%'
+    alignItems: 'center',
   },
+
+  inputContainer: {
+    marginTop: 30,
+   
+  },
+
+  inputRow: {
+    flexDirection: "row",
+    width: '100%',
+    height: 40,
+  },
+
+  comments: {
+    paddingRight:40,
+    paddingLeft:40,
+    width: '100%',
+    marginTop: 10,
+  },
+
   title: {
     paddingTop:15,
-    fontSize: 35,
+    fontSize: 22,
     fontWeight: '600',
     color: colors.primary
   },
   descriptions: {
     padding:5,
-    fontSize: 20,
+    fontSize: 14,
     color: 'gray'
   },
+
   container: {
       flex: .9,
       backgroundColor: '#A9A9A9',
       width: '80%',
       alignItems: 'flex-start',
-      justifyContent: 'center',
-      alignSelf: 'center',
-      paddingTop: '3%'
+      justifyContent: 'center', 
     },
+    
     heartContainer: {
       flexDirection: 'row',
+      alignItems: 'center',
+      marginTop: 45
     },
+
+
+    heartText: {
+      fontSize: 20,
+    },
+
   root: {
     //backgroundColor: "gray",
     marginTop:10,
@@ -364,10 +457,18 @@ export const detailsStyle = StyleSheet.create({
     flex: 1,
   },
   contentHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 6
+    flexDirection: 'column',
+    marginBottom: 6,
+    marginTop:10,
   },
+
+  commentsRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+
+
   separator: {
     height: 1,
     backgroundColor: "#CCCCCC"
@@ -379,5 +480,97 @@ export const detailsStyle = StyleSheet.create({
   name:{
     fontSize:16,
     fontWeight:"bold",
-  }
+    color: colors.primary
+
+  },
+
+});
+
+export const UploadPostStyle = StyleSheet.create({
+
+  Addimage:{
+  alignItems: 'center',
+  padding: 10,
+  margin: 30,
+  height: 40,
+  borderRadius: 20,
+  borderColor: colors.primary,
+  borderWidth: 1,
+  
+  },
+
+  AddimageT: {
+    color: colors.primary,
+    fontSize:16,
+    fontWeight:"bold",
+  },
+
+  Addtitle: {
+  padding: 10,
+  marginTop: 15,
+  paddingRight: 90,
+  paddingLeft: 90,
+  borderRadius: 20,
+  height: 55,
+  borderColor: colors.primary,
+  borderWidth: 1,
+
+  },
+
+  AddDescription: {
+  marginTop: 15,
+  paddingRight: 100,
+  paddingLeft: 100,
+  borderRadius: 20,
+  height: 55,
+  borderColor: colors.primary,
+  borderWidth: 1,
+  color: colors.primary,
+
+  },
+
+  SubmitPost: {
+    alignItems:'center',
+    marginTop: 48,
+    paddingRight: 50,
+    paddingLeft: 50,
+    borderRadius: 15,
+    height: 45,
+    borderColor: colors.primary,
+    backgroundColor: colors.primary,
+    borderWidth: 1,
+    
+
+  },
+
+  SubmitTitle: {
+    fontSize: 20,
+    marginTop:10,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+
+  header22: {
+    flexDirection: 'row',
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: colors.primary,
+    marginLeft: 95
+    
+  },
+
+  postinghere: {
+    flexDirection: 'column',
+    alignItems: 'center',
+
+  },
+
+  PostDetails: {
+    marginTop: 40, 
+    alignItems: 'center',
+    fontWeight: 'bold',
+    fontSize: 20,
+    color: colors.primary,
+  },
+
 });

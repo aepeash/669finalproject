@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextInput, Text, View, Image,
+import { TextInput, Text, View, Image,ScrollView,
   FlatList, KeyboardAvoidingView, ActivityIndicator } 
   from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
@@ -10,12 +10,14 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { homeStyles } from './Styles';
 import { FontAwesome } from '@expo/vector-icons'; 
 
+
 export class HomeScreen extends React.Component {
     constructor(props) {
         super(props);
 
         this.dataModel = getDataModel();
         this.self = this.props.route.params.currentUser;
+
 
         this.state = {
           query: '',
@@ -93,21 +95,30 @@ export class HomeScreen extends React.Component {
       }
 
         return (
+        <ScrollView >
         <KeyboardAvoidingView style={{flex: 1, alignItems: 'center', alignContent: 'flex-start', width: '100%'}}
         behavior={"height"}
         keyboardVerticalOffset={100}>
-          <View style={homeStyles.headerContainer}>
-            <Text style={homeStyles.header}>All posts</Text>
-            <FontAwesome name="user-circle-o" 
-                          size={24} 
-                          color={'#F68444'}
-                          onPress={()=>this.props.navigation.navigate('Profile', {'currentUser': this.self})} />
-            <FontAwesome name="plus-circle"
-                          size={40} 
-                          color={'#F68444'}
-                          onPress={()=>this.props.navigation.navigate('Upload Post',{'currentUser': this.self} )} />
-                       
+          <View style={homeStyles.headerParent}>
+            <View style={homeStyles.appName}>
+              <Text style={homeStyles.header1}>Jarts</Text>
+            </View>
+            <View style={homeStyles.headerContainer}>
+              <FontAwesome name="user-circle-o" 
+                            size={33} 
+                            color={'#F68444'}
+                            onPress={()=>this.props.navigation.navigate('Profile', {'currentUser': this.self})} />
+              <FontAwesome name="plus-circle"
+                        style={{
+                          marginLeft: 18,
+                        }} 
+                            size={39} 
+                            color={'#F68444'}
+                            onPress={()=>this.props.navigation.navigate('Upload Post',{'currentUser': this.self} )} />
+          </View>          
           </View>
+          <Text style={homeStyles.header}>All posts</Text>
+
         <View style={postFeedStyles.postListContainer}>
           <FlatList 
             ListHeaderComponent={this.renderHeader}
@@ -124,7 +135,16 @@ export class HomeScreen extends React.Component {
                 <View style={homeStyles.container}>
                  
                     <Image style={homeStyles.image} source={{uri: item.imageURL}}/>
-                    <Text style={homeStyles.title}>{item.title}</Text>
+                    <View style= {homeStyles.titleandlike}>
+                      <Text style={homeStyles.title}>{item.title}</Text>
+                      <TouchableOpacity onPress={()=> this.dataModel.addLikes(item)}>
+                        <FontAwesome 
+                        name="thumbs-up"
+                        size={28} 
+                        color={'#F68444'}/>
+                        <Text> {(item.likes)} </Text>
+                      </TouchableOpacity>
+                    </View>
                     <Text style={homeStyles.descriptions}>{item.description}</Text>
                     
                 </View>
@@ -134,6 +154,7 @@ export class HomeScreen extends React.Component {
           />
         </View>
       </KeyboardAvoidingView>
+      </ScrollView>
         )
     }
 }

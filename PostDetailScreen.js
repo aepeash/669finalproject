@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextInput, Text, View, Image,
+import { TextInput, Text, View, Image, ScrollView,
   FlatList, KeyboardAvoidingView } 
   from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
@@ -60,58 +60,63 @@ export class PostDetailScreen extends React.Component {
 
     render() {
       return (
-        <View style={detailsStyle.detailsContainer}>
-          <Image style={detailsStyle.image} source={{uri: this.post.imageURL}}/>
-          <Text style={detailsStyle.title}>{(this.post.title)}</Text>
-          <Text style={detailsStyle.descriptions}>{(this.post.description)}</Text>
-          <View style={detailsStyle.heartContainer}>
-            <AntDesign name="hearto" 
-                              size={24} 
-                              color={'#F68444'}
-                              onPress={()=>this.dataModel.savePost(this.post, this.self.key)} />
-            <Text> Add this to your list!</Text>
-          </View>
+        <ScrollView >
           <View style={detailsStyle.detailsContainer}>
-            <View style={chatStyles.inputContainer}>
-            <View style={chatStyles.inputRow}>
-              <TextInput 
-                style={chatStyles.inputBox}
-                value={this.state.inputText}
-                returnKeyType={'send'}
-                onChangeText={(text) => {
-                  this.setState({inputText: text})
-                }}
-                onSubmitEditing={this.onCommentSend}/>
-              <Ionicons 
-                name='md-send' 
-                size={36}
-                color={colors.primary}
-                onPress={this.onCommentSend}
-              />
+            <Image style={detailsStyle.image} source={{uri: this.post.imageURL}}/>
+            <Text style={detailsStyle.title}>{(this.post.title)}</Text>
+            <Text style={detailsStyle.descriptions}>{(this.post.description)}</Text>
+            <View style={detailsStyle.heartContainer}>
+              <FontAwesome name="heart" 
+                                size={24} 
+                                color={'#F68444'}
+                                onPress={()=>this.dataModel.savePost(this.post, this.self.key)} />
+              <View style={detailsStyle.heartText}>
+              <Text> Add this to your favorites!</Text>
+              </View>
             </View>
+            
+            <View style={detailsStyle.inputContainer}>
+              <View style={detailsStyle.inputRow}>
+                <TextInput 
+                  placeholder='Type a comment'
+                  style={chatStyles.inputBox}
+                  value={this.state.inputText}
+                  returnKeyType={'send'}
+                  onChangeText={(text) => {
+                    this.setState({inputText: text})
+                  }}
+                  onSubmitEditing={this.onCommentSend}/>
+                <Ionicons 
+                  name='md-send' 
+                  size={36}
+                  color={colors.primary}
+                  onPress={this.onCommentSend}
+                />
+              </View>
+            </View>
+            <View style={detailsStyle.comments} > 
+
+              <FlatList
+                  data={this.post.comments}
+                  ref={(ref) => {this.flatListRef = ref}}
+                  renderItem={({item}) => {
+                      return (
+                        <View style={detailsStyle.contentHeader}>
+                          <View style= {detailsStyle.commentsRow}>
+                            <Text  style={detailsStyle.name}>{this.dataModel.getUserForID(item.author).displayName}</Text>
+                            <Text style={detailsStyle.time}> {this.dataModel.parseUnixTimestamp(item.timestamp)}</Text>
+                          </View>
+                          <Text>{item.text}</Text>
+
+                          
+                        </View>
+                        
+                      );
+                  }}
+                />
             </View>
           </View>
-
-            <FlatList
-                style={detailsStyle.root}
-                data={this.post.comments}
-                ref={(ref) => {this.flatListRef = ref}}
-                renderItem={({item}) => {
-                    return (
-                        <View style={detailsStyle.secondcontainer}>
-                            <View style={detailsStyle.content}>
-                                <View style={detailsStyle.contentHeader}>
-                                    <Text  style={detailsStyle.name}>{item.author.displayName}</Text>
-                                    <Text style={detailsStyle.time}> {this.dataModel.parseUnixTimestamp(item.timestamp)}</Text>
-                                    <Text>{item.text}</Text>
-                                </View>
-                            </View>
-                        </View>
-              );
-            }}
-          />
-        </View>
-
+        </ScrollView>
       )
   }
 

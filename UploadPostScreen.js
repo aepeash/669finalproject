@@ -3,6 +3,7 @@ import { Image, View, Text,TextInput, TouchableOpacity, ActivityIndicator } from
 import {launchImageLibrary} from 'react-native-image-picker'
 import * as ImagePicker from 'expo-image-picker';
 import { getDataModel } from './DataModel';
+import { UploadPostStyle,homeStyles } from './Styles';
 
 
 export class UploadPostScreen extends React.Component {
@@ -75,45 +76,41 @@ export class UploadPostScreen extends React.Component {
     return (
       <View style={{ flex: 1, marginTop: 60 }}>
         <View>
+        <Text style={UploadPostStyle.header22}>Create New Post</Text>
           {this.state.image ? (
             <Image
               source={{uri: this.state.image}}
               style={{ width: '100%', height: 300 }}
             />
           ) : (
-            <TouchableOpacity
-              onPress={this.selectImage}
-              style={{
-                alignItems: 'center',
-                padding: 10,
-                margin: 30
-              }}>
-            <Text>Add an image</Text>
+            <TouchableOpacity style={UploadPostStyle.Addimage}
+              onPress={this.selectImage}>
+            <Text style={UploadPostStyle.AddimageT}>Add an image</Text>
             </TouchableOpacity>
           )}
         </View>
-        <View style={{ marginTop: 80, alignItems: 'center' }}>
-          <Text>Post Details</Text>
-          <TextInput
+        <View style={UploadPostStyle.postinghere}>
+          <Text style={UploadPostStyle.PostDetails}> Post Details: </Text>
+          <TextInput style={UploadPostStyle.Addtitle}
             placeholder='Enter title of the post'
-            style={{ margin: 20 }}
             value={this.state.title}
             onChangeText={title => this.onChangeTitle(title)}
           />
-          <TextInput
-            placeholder='Enter description'
-            style={{ margin: 20 }}
+          <TextInput style={UploadPostStyle.AddDescription}
+            placeholder='Enter a description'
             value={this.state.description}
             onChangeText={description => this.onChangeDescription(description)}
           />
-          <TouchableOpacity onPress={ async ()=> {
+          <TouchableOpacity
+                style={UploadPostStyle.SubmitPost}
+                onPress={ async ()=> {
                 this.setState({loading: true})
                 await this.dataModel.addPost(this.state.title, this.state.description, this.state.image, this.self)
                 this.setState({loading: false})
                 this.props.navigation.navigate('Home')
 
             }}>
-          <Text>Add a post</Text>
+          <Text style={UploadPostStyle.SubmitTitle} >Submit</Text>
           </TouchableOpacity>
         </View>
       </View>

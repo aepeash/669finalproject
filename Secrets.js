@@ -10,11 +10,10 @@
 // };
 
 export const firebaseConfig = {
-      apiKey: "AIzaSyB25gZEXny-4gAVN_mQBpR112RZLYEKwBM",
-      authDomain: "final-38348.firebaseapp.com",
-      databaseURL: "https://final-38348.firebaseio.com",
-      projectId: "final-38348",
-      storageBucket: "final-38348.appspot.com",
-      messagingSenderId: "879268986184",
-      appId: "1:879268986184:web:c78b9d630628019729077d"
+    apiKey: "AIzaSyDdGWPagEmBt4qbYH7U8UpGNZvZLl0Oj0s",
+    authDomain: "si-669finalproject.firebaseapp.com",
+    projectId: "si-669finalproject",
+    storageBucket: "si-669finalproject.appspot.com",
+    messagingSenderId: "644751905332",
+    appId: "1:644751905332:web:b5a1a209329efd5e92f061"
     };

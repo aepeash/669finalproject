@@ -397,8 +397,7 @@ class DataModel {
     // ... and update the current image Document in Firestore
     console.log("waiting for image url");
     let downloadImagePostURL = await imageRef.getDownloadURL();
-    let author = self;
-    delete author.password;
+    let author = self.key;
   
   
     let post = {
@@ -406,6 +405,7 @@ class DataModel {
      // width: imageObject.width,
       author: author,
       title: title,
+      likes: 0,
       description: description,
       imageURL: downloadImagePostURL,
       timestamp: Date.now()
@@ -427,6 +427,12 @@ class DataModel {
   
   
   }
+
+  addLikes = async (post) => {
+    this.postsRef.doc(post.key).update({likes: post.likes+1});
+  }
+    
+  
 
   parseUnixTimestamp = (unix_timestamp) => {
     /* I took most of this thisfrom this
